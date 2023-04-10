@@ -5,11 +5,12 @@
 
 #include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/variant/variant.hpp>
-#include <godot_cpp/variant/array.hpp>
+
+#include "../interfaces.h"
 
 using namespace godot;
 
-class Tuple : public RefCounted {
+class Tuple : public RefCounted, Comparable {
     GDCLASS(Tuple, RefCounted);
 
 private:
@@ -23,12 +24,18 @@ public:
 	~Tuple();
 
     static Tuple* empty();
-    //static Tuple with(Variant xs...);
+    static Tuple* with(Array xs);
 
-    /*Variant& operator[](uint64_t idx);
-    Array to_array();*/
+    Variant at(int idx);
+    Array to_array();
     bool is_empty();
     size_t size();
+
+    bool equals(Tuple* other);
+    bool lessThan(Tuple* other);
+
+    Variant& operator[](int index);
+    bool operator==(Tuple other);
 };
 
 #endif // RX_TUPLE_H
