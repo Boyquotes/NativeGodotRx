@@ -11,8 +11,8 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "abstract/disposable.h"
 #include "internal/basic.h"
-#include "internal/tuple.h"
 
 using namespace godot;
 
@@ -20,8 +20,7 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
-
-	ClassDB::register_class<Tuple>();
+	ClassDB::register_abstract_class<DisposableBase>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {

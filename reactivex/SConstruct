@@ -15,6 +15,8 @@ env = SConscript("../SConstruct")
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
+sources = sources + Glob("src/abstract/*.cpp")
+sources = sources + Glob("src/exception/*.cpp")
 sources = sources + Glob("src/internal/*.cpp")
 
 if env["platform"] == "macos":
