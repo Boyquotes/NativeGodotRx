@@ -8,7 +8,7 @@
 #include <godot_cpp/variant/callable.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
-#include "disposable.h"
+#include "abstract/disposable.h"
 
 #include <chrono>
 
@@ -23,36 +23,39 @@ public:
 
 protected:
     static void _bind_methods() {
-
+        BIND_VIRTUAL_METHOD(SchedulerBase, now);
+        BIND_VIRTUAL_METHOD(SchedulerBase, schedule);
+        BIND_VIRTUAL_METHOD(SchedulerBase, schedule_absolute);
+        BIND_VIRTUAL_METHOD(SchedulerBase, schedule_relative);
     }
 
 public:
-    float now() {
+    virtual float now() {
         throw NotImplementedException();
     }
 
-    DisposableBase* schedule(Callable action, Variant state) {
+    virtual DisposableBase* schedule(Callable action, Variant state) {
         throw NotImplementedException();
     }
 
-    DisposableBase* schedule_absolute(float duetime, Callable action, Variant state) {
+    virtual DisposableBase* schedule_absolute(float duetime, Callable action, Variant state) {
         throw NotImplementedException();
     }
 
-    DisposableBase* schedule_relative(float duetime, Callable action, Variant state) {
+    virtual DisposableBase* schedule_relative(float duetime, Callable action, Variant state) {
         throw NotImplementedException();
     }
 
     static float to_seconds(std::chrono::time_point<std::chrono::system_clock> t) {
-        return 0.0f;
+        throw NotImplementedException();
     }
 
     static float to_timedelta(std::chrono::time_point<std::chrono::system_clock> t) {
-        return 0.0f;
+        throw NotImplementedException();
     }
 
     static float to_datetime(std::chrono::time_point<std::chrono::system_clock>::duration dt) {
-        return 0.0f;
+        throw NotImplementedException();
     }
 
 };

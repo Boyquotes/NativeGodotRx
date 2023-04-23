@@ -11,13 +11,15 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "abstract/scheduler.h"
-#include "abstract/disposable.h"
-#include "abstract/observer.h"
-#include "abstract/observable.h"
+#include "internal/basic.h"
 
 #include "exception/exceptionwrapper.h"
-#include "internal/basic.h"
+
+#include "abstract/disposable.h"
+#include "abstract/scheduler.h"
+#include "abstract/observer.h"
+#include "abstract/observable.h"
+#include "abstract/subject.h"
 
 using namespace godot;
 
@@ -25,10 +27,15 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
-	ClassDB::register_abstract_class<ObserverBase>();
-	ClassDB::register_abstract_class<DisposableBase>();
-	ClassDB::register_abstract_class<ObservableBase>();
+	// exception
 	ClassDB::register_abstract_class<RxError>();
+	// abstract
+	ClassDB::register_abstract_class<DisposableBase>();
+	ClassDB::register_abstract_class<SchedulerBase>();
+	ClassDB::register_abstract_class<ObservableBase>();
+	ClassDB::register_abstract_class<ObserverBase>();
+	ClassDB::register_abstract_class<SubjectAsObserver>();
+	ClassDB::register_abstract_class<SubjectAsObservable>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {

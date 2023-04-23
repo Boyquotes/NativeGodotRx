@@ -8,6 +8,9 @@
 #include <godot_cpp/variant/callable.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
+#include "abstract/disposable.h"
+#include "abstract/scheduler.h"
+
 using namespace godot;
 
 class ObservableBase : public RefCounted {
@@ -19,16 +22,11 @@ public:
 
 protected:
     static void _bind_methods() {
-        {
-		    MethodInfo mi;
-		    mi.arguments.push_back(PropertyInfo(Variant::VARIANT_MAX, "args"));
-		    mi.name = "subscribe";
-		    ClassDB::bind_vararg_method(METHOD_FLAGS_DEFAULT, "subscribe", &ObservableBase::subscribe, mi);
-	    }
+        BIND_VIRTUAL_METHOD(ObservableBase, subscribe);
     }
 
 public:
-    virtual void subscribe(const Variant **args, GDExtensionInt arg_count, GDExtensionCallError &error) {
+    virtual DisposableBase* subscribe(Callable on_next, Callable on_error, Callable on_completed, SchedulerBase* scheduler) {
         throw NotImplementedException();
     }
 

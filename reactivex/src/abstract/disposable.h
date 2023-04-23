@@ -15,16 +15,17 @@ using namespace godot;
 class DisposableBase : public RefCounted {
     GDCLASS(DisposableBase, RefCounted);
 
-protected:
-	static void _bind_methods() {
-        ClassDB::bind_method(D_METHOD("dispose"), &DisposableBase::dispose);
-        ClassDB::bind_method(D_METHOD("dispose_with", "obj"), &DisposableBase::dispose_with);
-    }
-
 public:
     DisposableBase(){}
     ~DisposableBase(){}
 
+protected:
+	static void _bind_methods() {
+        BIND_VIRTUAL_METHOD(DisposableBase, dispose);
+        BIND_VIRTUAL_METHOD(DisposableBase, dispose_with);
+    }
+
+public:
     virtual void dispose(){
         throw NotImplementedException();
     }
