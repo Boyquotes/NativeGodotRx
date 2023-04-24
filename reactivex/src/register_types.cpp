@@ -21,6 +21,8 @@
 #include "abstract/observable.h"
 #include "abstract/subject.h"
 
+#include "disposable/disposable.h"
+
 using namespace godot;
 
 void initialize_rx_module(ModuleInitializationLevel p_level) {
@@ -36,6 +38,8 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_abstract_class<ObserverBase>();
 	ClassDB::register_abstract_class<SubjectAsObserver>();
 	ClassDB::register_abstract_class<SubjectAsObservable>();
+	// disposable
+	ClassDB::register_class<Disposable>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {
