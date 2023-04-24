@@ -22,6 +22,7 @@
 #include "abstract/subject.h"
 
 #include "disposable/disposable.h"
+#include "disposable/booleandisposable.h"
 
 using namespace godot;
 
@@ -40,6 +41,7 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_abstract_class<SubjectAsObservable>();
 	// disposable
 	ClassDB::register_class<Disposable>();
+	ClassDB::register_class<BooleanDisposable>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {

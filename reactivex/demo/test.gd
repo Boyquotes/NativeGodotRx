@@ -1,15 +1,13 @@
 extends Node
 
-class Foo extends DisposableBase:
-	func _init():
-		pass
-
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var n = Foo.new()
-	n._ready()
+	var disp : Disposable = Disposable.Get(func(): print("!!!"))
+	disp.dispose()
+	disp.dispose()
+	#n._ready()
 
 
 

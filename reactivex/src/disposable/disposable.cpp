@@ -2,11 +2,17 @@
 
 #include <godot_cpp/variant/callable.hpp>
 
-Disposable::Disposable(){}
-Disposable::Disposable(Callable action) : is_disposed(false), action(action), lock() {}
+Disposable::Disposable() : is_disposed(false), action(), lock() {}
 Disposable::~Disposable(){}
 
+Disposable* Disposable::Get(Callable action) {
+    auto disp = memnew(Disposable);
+    disp->action = action;
+    return disp;
+}
+
 void Disposable::_bind_methods() {
+    ClassDB::bind_static_method("Disposable", D_METHOD("Get", "action"), &Disposable::Get);
     ClassDB::bind_method(D_METHOD("dispose"), &Disposable::dispose);
     ClassDB::bind_method(D_METHOD("dispose_with", "obj"), &Disposable::dispose_with);
 }
@@ -21,7 +27,7 @@ void Disposable::dispose() {
     this->lock.unlock();
 
     if (disposed) {
-        this->action.call();
+        this->action.callv(Array());
     }
 }
 
