@@ -36,7 +36,7 @@ public:
     virtual void dispose_with(Object* obj) override;
 
     void add(DisposableBase* item);
-    void remove(DisposableBase* item);
+    bool remove(DisposableBase* item);
     void clear();
     bool contains(DisposableBase* item);
     Array to_list();
