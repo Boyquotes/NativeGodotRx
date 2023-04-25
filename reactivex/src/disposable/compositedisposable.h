@@ -32,8 +32,8 @@ public:
 
     static CompositeDisposable* Get(Array items);
 
-    virtual void dispose() override;
-    virtual void dispose_with(Object* obj) override;
+    void dispose() override;
+    void dispose_with(Object* obj) override;
 
     void add(DisposableBase* item);
     bool remove(DisposableBase* item);

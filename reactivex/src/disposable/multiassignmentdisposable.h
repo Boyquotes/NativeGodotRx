@@ -32,8 +32,8 @@ public:
 
     static MultiAssignmentDisposable* Get();
 
-    virtual void dispose() override;
-    virtual void dispose_with(Object* obj) override;
+    void dispose() override;
+    void dispose_with(Object* obj) override;
 
     Ref<DisposableBase> get_disposable();
     void set_disposable(DisposableBase* value);

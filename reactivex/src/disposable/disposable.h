@@ -33,8 +33,8 @@ public:
 
     static Disposable* Get(Callable action);
 
-    virtual void dispose() override;
-    virtual void dispose_with(Object* obj) override;
+    void dispose() override;
+    void dispose_with(Object* obj) override;
 };
 
 #endif // RX_DISPOABLE_DISPOSABLE_H
