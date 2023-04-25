@@ -14,6 +14,13 @@ func _ready():
 	cd.add(Disposable.Get(func(): print("3")))
 	cd.remove(disp)
 	cd.dispose()
+	
+	var mad = MultiAssignmentDisposable.Get()
+	mad.disposable = Disposable.Get(func(): print("<!>"))
+	mad.dispose()
+	#mad.disposable = Disposable.Get(func(): print("<!>"))
+	#mad.disposable.dispose()
+	#mad.dispose()
 
 
 

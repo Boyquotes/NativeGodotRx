@@ -24,6 +24,7 @@
 #include "disposable/disposable.h"
 #include "disposable/booleandisposable.h"
 #include "disposable/compositedisposable.h"
+#include "disposable/multiassignmentdisposable.h"
 
 using namespace godot;
 
@@ -44,6 +45,7 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<Disposable>();
 	ClassDB::register_class<BooleanDisposable>();
 	ClassDB::register_class<CompositeDisposable>();
+	ClassDB::register_class<MultiAssignmentDisposable>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {
