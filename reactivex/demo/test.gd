@@ -17,10 +17,11 @@ func _ready():
 	
 	var mad = MultiAssignmentDisposable.Get()
 	mad.disposable = Disposable.Get(func(): print("<!>"))
-	mad.dispose()
-	#mad.disposable = Disposable.Get(func(): print("<!>"))
-	#mad.disposable.dispose()
 	#mad.dispose()
+	
+	var rcd = RefCountDisposable.Get(mad)
+	var dref1 = rcd.disposable
+	dref1.dispose()
 
 
 

@@ -35,11 +35,11 @@ public:
 
     static RefCountDisposable* Get(DisposableBase* disp);
 
-    virtual void dispose() override;
-    virtual void dispose_with(Object* obj) override;
+    void dispose() override;
+    void dispose_with(Object* obj) override;
 
     void release();
-    Ref<DisposableBase> get_disposable();
+    DisposableBase* get_disposable();
 };
 
 
@@ -61,6 +61,7 @@ public:
     static InnerDisposable* Get(RefCountDisposable* parent);
 
     void dispose() override;
+    void dispose_with(Object* obj) override;
 };
 
 #endif // RX_DISPOABLE_REFCOUNTDISPOSABLE_H

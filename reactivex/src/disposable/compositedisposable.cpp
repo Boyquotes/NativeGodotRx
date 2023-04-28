@@ -15,7 +15,7 @@ void CompositeDisposable::_bind_methods() {
     ClassDB::bind_method(D_METHOD("remove", "item"), &CompositeDisposable::remove);
     ClassDB::bind_method(D_METHOD("dispose"), &CompositeDisposable::dispose);
     ClassDB::bind_method(D_METHOD("clear"), &CompositeDisposable::clear);
-    ClassDB::bind_method(D_METHOD("contains"), &CompositeDisposable::contains);
+    ClassDB::bind_method(D_METHOD("contains", "item"), &CompositeDisposable::contains);
     ClassDB::bind_method(D_METHOD("to_list"), &CompositeDisposable::to_list);
     ClassDB::bind_method(D_METHOD("size"), &CompositeDisposable::size);
     ClassDB::bind_method(D_METHOD("dispose_with", "obj"), &CompositeDisposable::dispose_with);
