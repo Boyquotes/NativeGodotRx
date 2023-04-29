@@ -30,6 +30,7 @@
 #include "disposable/refcountdisposable.h"
 #include "disposable/singleassignmentdisposable.h"
 #include "disposable/scheduleddisposable.h"
+#include "disposable/serialdisposable.h"
 
 using namespace godot;
 
@@ -58,6 +59,7 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<RefCountDisposable>();
 	ClassDB::register_class<SingleAssignmentDisposable>();
 	ClassDB::register_class<ScheduledDisposable>();
+	ClassDB::register_class<SerialDisposable>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {
