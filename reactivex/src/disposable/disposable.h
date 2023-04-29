@@ -1,7 +1,5 @@
-#ifndef RX_DISPOABLE_DISPOSABLE_H
-#define RX_DISPOABLE_DISPOSABLE_H
-
-#include <mutex>
+#ifndef RX_DISPOSABLE_DISPOSABLE_H
+#define RX_DISPOSABLE_DISPOSABLE_H
 
 #include <godot_cpp/core/binder_common.hpp>
 
@@ -12,6 +10,7 @@
 #include <godot_cpp/variant/callable.hpp>
 
 #include "abstract/disposable.h"
+#include "internal/rlock.h"
 #include "exception/exception.h"
 
 using namespace godot;
@@ -22,7 +21,7 @@ class Disposable : public DisposableBase {
 public:
     bool is_disposed;
     Callable action;
-    std::recursive_mutex lock;
+    Ref<RLock> lock;
 
 protected:
 	static void _bind_methods();
@@ -31,10 +30,17 @@ public:
     Disposable();
     ~Disposable();
 
-    static Disposable* Get(Callable action);
+    static Disposable* Get(const Callable& action);
 
     void dispose() override;
     void dispose_with(Object* obj) override;
+
+    // Setters and Getters
+    bool __get__is_disposed__();
+    void __set__is_disposed__(bool is_disposed);
+    Ref<RLock> __get__lock__();
+    Callable __get__action__();
+    void __set__action__(const Callable& action);
 };
 
-#endif // RX_DISPOABLE_DISPOSABLE_H
+#endif // RX_DISPOSABLE_DISPOSABLE_H

@@ -1,7 +1,5 @@
-#ifndef RX_DISPOABLE_MULTIASSIGNMENTDISPOSABLE_H
-#define RX_DISPOABLE_MULTIASSIGNMENTDISPOSABLE_H
-
-#include <mutex>
+#ifndef RX_DISPOSABLE_MULTIASSIGNMENTDISPOSABLE_H
+#define RX_DISPOSABLE_MULTIASSIGNMENTDISPOSABLE_H
 
 #include <godot_cpp/core/binder_common.hpp>
 
@@ -11,6 +9,7 @@
 #include <godot_cpp/core/class_db.hpp>
 
 #include "abstract/disposable.h"
+#include "internal/rlock.h"
 #include "exception/exception.h"
 
 using namespace godot;
@@ -21,7 +20,7 @@ class MultiAssignmentDisposable : public DisposableBase {
 public:
     Ref<DisposableBase> current;
     bool is_disposed;
-    std::recursive_mutex lock;
+    Ref<RLock> lock;
 
 protected:
 	static void _bind_methods();
@@ -37,6 +36,11 @@ public:
 
     Ref<DisposableBase> get_disposable();
     void set_disposable(DisposableBase* value);
+
+    // Setters and Getters
+    bool __get__is_disposed__();
+    void __set__is_disposed__(bool is_disposed);
+    Ref<RLock> __get__lock__();
 };
 
-#endif // RX_DISPOABLE_MULTIASSIGNMENTDISPOSABLE_H
+#endif // RX_DISPOSABLE_MULTIASSIGNMENTDISPOSABLE_H

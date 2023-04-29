@@ -1,7 +1,5 @@
-#ifndef RX_DISPOABLE_BOOLEANDISPOSABLE_H
-#define RX_DISPOABLE_BOOLEANDISPOSABLE_H
-
-#include <mutex>
+#ifndef RX_DISPOSABLE_BOOLEANDISPOSABLE_H
+#define RX_DISPOSABLE_BOOLEANDISPOSABLE_H
 
 #include <godot_cpp/core/binder_common.hpp>
 
@@ -11,6 +9,7 @@
 #include <godot_cpp/core/class_db.hpp>
 
 #include "abstract/disposable.h"
+#include "internal/rlock.h"
 #include "exception/exception.h"
 
 using namespace godot;
@@ -20,7 +19,7 @@ class BooleanDisposable : public DisposableBase {
 
 public:
     bool is_disposed;
-    std::recursive_mutex lock;
+    Ref<RLock> lock;
 
 protected:
 	static void _bind_methods();
@@ -33,6 +32,11 @@ public:
 
     void dispose() override;
     void dispose_with(Object* obj) override;
+
+    // Setters and Getters
+    bool __get__is_disposed__();
+    void __set__is_disposed__(bool is_disposed);
+    Ref<RLock> __get__lock__();
 };
 
-#endif // RX_DISPOABLE_BOOLEANDISPOSABLE_H
+#endif // RX_DISPOSABLE_BOOLEANDISPOSABLE_H

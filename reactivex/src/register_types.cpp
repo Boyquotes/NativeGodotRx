@@ -11,15 +11,17 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "exception/exceptionwrapper.h"
 #include "internal/basic.h"
 
-#include "exception/exceptionwrapper.h"
-
+#include "abstract/lock.h"
 #include "abstract/disposable.h"
 #include "abstract/scheduler.h"
 #include "abstract/observer.h"
 #include "abstract/observable.h"
 #include "abstract/subject.h"
+
+#include "internal/rlock.h"
 
 #include "disposable/disposable.h"
 #include "disposable/booleandisposable.h"
@@ -36,12 +38,15 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	// exception
 	ClassDB::register_abstract_class<RxError>();
 	// abstract
+	ClassDB::register_abstract_class<LockBase>();
 	ClassDB::register_abstract_class<DisposableBase>();
 	ClassDB::register_abstract_class<SchedulerBase>();
 	ClassDB::register_abstract_class<ObservableBase>();
 	ClassDB::register_abstract_class<ObserverBase>();
 	ClassDB::register_abstract_class<SubjectAsObserver>();
 	ClassDB::register_abstract_class<SubjectAsObservable>();
+	// internal
+	ClassDB::register_class<RLock>();
 	// disposable
 	ClassDB::register_class<Disposable>();
 	ClassDB::register_class<BooleanDisposable>();

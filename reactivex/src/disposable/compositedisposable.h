@@ -1,7 +1,5 @@
-#ifndef RX_DISPOABLE_COMPOSITEDISPOSABLE_H
-#define RX_DISPOABLE_COMPOSITEDISPOSABLE_H
-
-#include <mutex>
+#ifndef RX_DISPOSABLE_COMPOSITEDISPOSABLE_H
+#define RX_DISPOSABLE_COMPOSITEDISPOSABLE_H
 
 #include <godot_cpp/core/binder_common.hpp>
 
@@ -11,6 +9,7 @@
 #include <godot_cpp/core/class_db.hpp>
 
 #include "abstract/disposable.h"
+#include "internal/rlock.h"
 #include "exception/exception.h"
 
 using namespace godot;
@@ -21,7 +20,7 @@ class CompositeDisposable : public DisposableBase {
 public:
     Array disposable;
     bool is_disposed;
-    std::recursive_mutex lock;
+    Ref<RLock> lock;
 
 protected:
 	static void _bind_methods();
@@ -30,7 +29,7 @@ public:
     CompositeDisposable();
     ~CompositeDisposable();
 
-    static CompositeDisposable* Get(Array items);
+    static CompositeDisposable* Get(const Array& items);
 
     void dispose() override;
     void dispose_with(Object* obj) override;
@@ -41,6 +40,12 @@ public:
     bool contains(DisposableBase* item);
     Array to_list();
     int size();
+
+    // Setters and Getters
+    // Setters and Getters
+    bool __get__is_disposed__();
+    void __set__is_disposed__(bool is_disposed);
+    Ref<RLock> __get__lock__();
 };
 
-#endif // RX_DISPOABLE_COMPOSITEDISPOSABLE_H
+#endif // RX_DISPOSABLE_COMPOSITEDISPOSABLE_H
