@@ -1,5 +1,5 @@
-#ifndef RX_DISPOSABLE_DISPOSABLE_H
-#define RX_DISPOSABLE_DISPOSABLE_H
+#ifndef RX_DISPOSABLE_SINGLEASSIGNMENTDISPOSABLE_H
+#define RX_DISPOSABLE_SINGLEASSIGNMENTDISPOSABLE_H
 
 #include <godot_cpp/core/binder_common.hpp>
 
@@ -15,33 +15,33 @@
 
 using namespace godot;
 
-class Disposable : public DisposableBase {
-    GDCLASS(Disposable, DisposableBase);
+class SingleAssignmentDisposable : public DisposableBase {
+    GDCLASS(SingleAssignmentDisposable, DisposableBase);
 
 public:
     bool is_disposed;
-    Callable action;
+    Ref<DisposableBase> current;
     Ref<RLock> lock;
 
 protected:
 	static void _bind_methods();
 
 public:
-    Disposable();
-    ~Disposable();
+    SingleAssignmentDisposable();
+    ~SingleAssignmentDisposable();
 
-    static Disposable* Get(const Callable& action);
-    static Disposable* Empty();
+    static SingleAssignmentDisposable* Get();
 
     void dispose() override;
     void dispose_with(Object* obj) override;
+
+    Ref<DisposableBase> get_disposable();
+    void set_disposable(Ref<DisposableBase> value);
 
     // Setters and Getters
     bool __get__is_disposed__();
     void __set__is_disposed__(bool is_disposed);
     Ref<RLock> __get__lock__();
-    Callable __get__action__();
-    void __set__action__(const Callable& action);
 };
 
-#endif // RX_DISPOSABLE_DISPOSABLE_H
+#endif // RX_DISPOSABLE_SINGLEASSIGNMENTDISPOSABLE_H

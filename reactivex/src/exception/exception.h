@@ -11,4 +11,12 @@ public:
     }
 };
 
+class DisposedException : public std::exception
+{
+public:
+    virtual char const* what() { 
+        return "Tried to access disposed element!"; 
+    }
+};
+
 #endif // RX_EXCEPTION_EXCEPTION_H

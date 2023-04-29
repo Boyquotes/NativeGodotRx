@@ -36,7 +36,9 @@ func _ready():
 	
 	var d = Disposable.Get(func(): print(":("))
 	d.action = func(): print(":)")
-	d.dispose()
+	var sad = SingleAssignmentDisposable.Get()
+	sad.disposable = Disposable.Empty()
+	sad.dispose()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
