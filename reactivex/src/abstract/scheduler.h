@@ -34,15 +34,15 @@ public:
         throw NotImplementedException();
     }
 
-    virtual DisposableBase* schedule(Callable action, Variant state) {
+    virtual DisposableBase* schedule(Callable action, Variant state = Variant()) {
         throw NotImplementedException();
     }
 
-    virtual DisposableBase* schedule_absolute(float duetime, Callable action, Variant state) {
+    virtual DisposableBase* schedule_absolute(float duetime, Callable action, Variant state = Variant()) {
         throw NotImplementedException();
     }
 
-    virtual DisposableBase* schedule_relative(float duetime, Callable action, Variant state) {
+    virtual DisposableBase* schedule_relative(float duetime, Callable action, Variant state = Variant()) {
         throw NotImplementedException();
     }
 
