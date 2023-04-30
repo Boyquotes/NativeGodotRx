@@ -16,9 +16,10 @@ env = SConscript("../SConstruct")
 env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 sources = sources + Glob("src/abstract/*.cpp")
+sources = sources + Glob("src/disposable/*.cpp")
 sources = sources + Glob("src/exception/*.cpp")
 sources = sources + Glob("src/internal/*.cpp")
-sources = sources + Glob("src/disposable/*.cpp")
+sources = sources + Glob("src/scheduler/*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(

@@ -5,48 +5,54 @@
 #include <exception>
 #include <iostream>
 
-template <class T>
-void noop(T args...) {
+void basic::noop() {}
+template <typename T>
+void basic::noop(T args...) {}
 
+template <typename T>
+T basic::identity(T x) {
+    return x;
 }
-
-template <class T0, class T1>
-T0 identity(T0 x, T1 args...) {
+template <typename T0, typename T1>
+T0 basic::identity(T0 x, T1 args...) {
     return x;
 }
 
-template <class T>
-T now() {
+template <typename T>
+T basic::now() {
     return std::chrono::system_clock::now();
 }
 
-template <class T>
-bool default_comparer(T x, T y) {
+template <typename T>
+bool basic::default_comparer(T x, T y) {
     return x == y;
 }
 
-template <class T>
-T default_sub_comparer(T x, T y) {
+template <typename T>
+T basic::default_sub_comparer(T x, T y) {
     return x - y;
 }
 
-template <class T>
-T default_key_serializer(T x) {
+template <typename T>
+T basic::default_key_serializer(T x) {
     return std::string(reinterpret_cast<uint64_t>(x));
 }
 
-template <class T>
-void default_error(T err) {
+template <typename T>
+void basic::default_error(T err) {
     throw err;
 }
 
-template <class T>
-void default_crash(T err) {
+template <typename T>
+void basic::default_crash(T err) {
     std::cout << "Unhandled exception: " << err.what << std::endl;
     exit(1);
 }
 
-template <class T>
-bool default_condition(T args...) {
+template <typename T>
+bool basic::default_condition(T args...) {
+    return true;
+}
+bool basic::default_condition() {
     return true;
 }

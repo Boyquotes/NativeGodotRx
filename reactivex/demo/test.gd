@@ -1,6 +1,6 @@
 extends Node
 
-
+var s = Scheduler.Get()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,11 +9,22 @@ func _ready():
 	sd.disposable = Disposable.Get(func(): print("2"))
 	sd.disposable = Disposable.Get(func(): print("3"))
 	sd.disposable = Disposable.Get(func(): print("4"))
-	sd.dispose()
+	#sd.dispose()
 	print(">>> ", sd.is_disposed)
+	
+	var rcd = RefCountDisposable.Get(sd)
+	var dref1 = rcd.disposable
+	var dref2 = rcd.disposable
+	var dref3 = rcd.disposable
+	print(">>> ", dref1.get_instance_id())
+	print(">>> ", dref2.get_instance_id())
+	print(">>> ", dref3.get_instance_id())
+	print(">>> ", rcd.count)
+	dref2.dispose()
+	print(">>> ", rcd.count)
 	#
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	print(">>> ", s.now())

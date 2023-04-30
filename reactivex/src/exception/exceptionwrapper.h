@@ -29,6 +29,7 @@ public:
     StringName what();
     StringName type();
     static RxError wrap(std::exception err);
+    void raise();
 };
 
 #endif // RX_ABSTRACT_EXCEPTIONWRAPPER_H

@@ -32,6 +32,8 @@
 #include "disposable/scheduleddisposable.h"
 #include "disposable/serialdisposable.h"
 
+#include "scheduler/scheduler.h"
+
 using namespace godot;
 
 void initialize_rx_module(ModuleInitializationLevel p_level) {
@@ -60,6 +62,8 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<SingleAssignmentDisposable>();
 	ClassDB::register_class<ScheduledDisposable>();
 	ClassDB::register_class<SerialDisposable>();
+	// scheduler
+	ClassDB::register_class<Scheduler>();
 }
 
 void uninitialize_rx_module(ModuleInitializationLevel p_level) {

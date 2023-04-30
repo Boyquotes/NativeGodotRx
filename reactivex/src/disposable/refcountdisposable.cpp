@@ -118,7 +118,7 @@ void RefCountDisposable::release() {
     }
 }
 
-DisposableBase* RefCountDisposable::get_disposable() {
+Ref<DisposableBase> RefCountDisposable::get_disposable() {
     this->lock->lock();
     if (this->is_disposed) {
         this->lock->unlock();

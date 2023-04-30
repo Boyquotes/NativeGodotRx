@@ -26,3 +26,7 @@ StringName RxError::type() {
 StringName RxError::what() {
     return err.what();
 }
+
+void RxError::raise() {
+    throw this->err;
+}
