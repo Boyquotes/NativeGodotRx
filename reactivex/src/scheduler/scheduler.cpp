@@ -36,8 +36,7 @@ float Scheduler::to_datetime(time_delta_ dt) {
 }
 
 float Scheduler::now() {
-    return Scheduler::to_seconds(std::chrono::system_clock::now());
-    //return Scheduler::to_seconds(basic::now()); ???
+    return Scheduler::to_seconds(basic::now<time_point_>());
 }
 
  Ref<DisposableBase> Scheduler::invoke_action(Callable action, Variant state) {

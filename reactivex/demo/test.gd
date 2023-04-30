@@ -1,7 +1,5 @@
 extends Node
 
-var s = Scheduler.Get()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var sd = SerialDisposable.Get()
@@ -27,4 +25,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var s = Scheduler.Get()
 	print(">>> ", s.now())
