@@ -26,7 +26,7 @@ protected:
     }
 
 public:
-    virtual IterableBase* iter() {
+    virtual Ref<IteratorBase> iter() {
         throw NotImplementedException();
     }
 };

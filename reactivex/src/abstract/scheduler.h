@@ -9,8 +9,7 @@
 #include <godot_cpp/core/class_db.hpp>
 
 #include "abstract/disposable.h"
-
-#include <chrono>
+#include "internal/time.h"
 
 using namespace godot;
 
@@ -30,31 +29,31 @@ protected:
     }
 
 public:
-    virtual float now() {
+    virtual Ref<AbsoluteTime> now() {
         throw NotImplementedException();
     }
 
-    virtual DisposableBase* schedule(Callable action, Variant state = Variant()) {
+    virtual Ref<DisposableBase> schedule(Callable action, Variant state = Variant()) {
         throw NotImplementedException();
     }
 
-    virtual DisposableBase* schedule_absolute(float duetime, Callable action, Variant state = Variant()) {
+    virtual Ref<DisposableBase> schedule_absolute(float duetime, Callable action, Variant state = Variant()) {
         throw NotImplementedException();
     }
 
-    virtual DisposableBase* schedule_relative(float duetime, Callable action, Variant state = Variant()) {
+    virtual Ref<DisposableBase> schedule_relative(float duetime, Callable action, Variant state = Variant()) {
         throw NotImplementedException();
     }
 
-    static float to_seconds(std::chrono::time_point<std::chrono::system_clock> t) {
+    static float to_seconds(const Variant& value) {
         throw NotImplementedException();
     }
 
-    static float to_timedelta(std::chrono::time_point<std::chrono::system_clock> t) {
+    static Ref<RelativeTime> to_timedelta(const Variant& value) {
         throw NotImplementedException();
     }
 
-    static float to_datetime(std::chrono::time_point<std::chrono::system_clock>::duration dt) {
+    static Ref<AbsoluteTime> to_datetime(const Variant& value) {
         throw NotImplementedException();
     }
 

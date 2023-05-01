@@ -38,8 +38,6 @@ public:
 
     bool is_disposed();
 
-    void _on_dispose();
-
     // Setters and Getters
     Ref<RLock> __get__lock__();
     Ref<SchedulerBase> __get__scheduler__();

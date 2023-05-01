@@ -32,7 +32,7 @@ public:
     RefCountDisposable();
     ~RefCountDisposable();
 
-    static RefCountDisposable* Get(DisposableBase* disp);
+    static RefCountDisposable* Get(Ref<DisposableBase> disp);
 
     void dispose() override;
     void dispose_with(Object* obj) override;
@@ -65,7 +65,7 @@ public:
     InnerDisposable();
     ~InnerDisposable();
 
-    static InnerDisposable* Get(RefCountDisposable* parent);
+    static InnerDisposable* Get(Ref<RefCountDisposable> parent);
 
     void dispose() override;
     void dispose_with(Object* obj) override;

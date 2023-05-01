@@ -28,14 +28,14 @@ Ref<DisposableBase> SerialDisposable::get_disposable() {
     return this->current;
 }
 
-void SerialDisposable::set_disposable(DisposableBase* value) {
+void SerialDisposable::set_disposable(Ref<DisposableBase> value) {
     Ref<DisposableBase> old;
 
     this->lock->lock();
     bool should_dispose = this->is_disposed;
     if (!should_dispose) {
         old = this->current;
-        this->current = Ref<DisposableBase>(value);
+        this->current = value;
     }
     this->lock->unlock();
 
@@ -43,7 +43,7 @@ void SerialDisposable::set_disposable(DisposableBase* value) {
         old->dispose();
     }
 
-    if (should_dispose && value) {
+    if (should_dispose && !value.is_null()) {
         value->dispose();
     }
 }

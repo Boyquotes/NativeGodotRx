@@ -22,6 +22,7 @@
 #include "abstract/subject.h"
 
 #include "internal/rlock.h"
+#include "internal/time.h"
 
 #include "disposable/disposable.h"
 #include "disposable/booleandisposable.h"
@@ -52,6 +53,8 @@ void initialize_rx_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_abstract_class<SubjectAsObservable>();
 	// internal
 	ClassDB::register_class<RLock>();
+	ClassDB::register_abstract_class<AbsoluteTime>();
+	ClassDB::register_abstract_class<RelativeTime>();
 	// disposable
 	ClassDB::register_class<Disposable>();
 	ClassDB::register_class<BooleanDisposable>();

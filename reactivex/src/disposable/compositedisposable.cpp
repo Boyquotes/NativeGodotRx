@@ -30,7 +30,7 @@ void CompositeDisposable::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "lock"), "", "__get__lock__");
 }
 
-void CompositeDisposable::add(DisposableBase* item) {
+void CompositeDisposable::add(Ref<DisposableBase> item) {
     bool should_dispose = false;
     this->lock->lock();
     if (this->is_disposed) {
@@ -46,7 +46,7 @@ void CompositeDisposable::add(DisposableBase* item) {
     }
 }
 
-bool CompositeDisposable::remove(DisposableBase* item) {
+bool CompositeDisposable::remove(Ref<DisposableBase> item) {
     if (this->is_disposed) {
         return false;
     }
@@ -95,7 +95,7 @@ void CompositeDisposable::clear() {
     }
 }
 
-bool CompositeDisposable::contains(DisposableBase* item) {
+bool CompositeDisposable::contains(Ref<DisposableBase> item) {
     return this->disposable.find(item) >= 0;
 }
 

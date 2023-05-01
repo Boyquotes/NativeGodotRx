@@ -19,4 +19,12 @@ public:
     }
 };
 
+class BadArgumentException : public std::exception
+{
+public:
+    virtual char const* what() { 
+        return "A function argument has a bad value!"; 
+    }
+};
+
 #endif // RX_EXCEPTION_EXCEPTION_H

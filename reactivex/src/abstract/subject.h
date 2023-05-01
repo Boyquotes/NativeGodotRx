@@ -32,22 +32,22 @@ protected:
     }
 
 public:
-    virtual DisposableBase* subscribe(Callable on_next, Callable on_error, Callable on_completed, SchedulerBase* scheduler) {
+    virtual Ref<DisposableBase> subscribe(Callable on_next, Callable on_error, Callable on_completed, Ref<SchedulerBase> scheduler) {
         throw NotImplementedException();
     }
     virtual void on_next(Variant i) {
         throw NotImplementedException();
     }
-    virtual void on_error(RxError* e) {
+    virtual void on_error(Ref<RxError> e) {
         throw NotImplementedException();
     }
     virtual void on_completed() {
         throw NotImplementedException();
     }
-    virtual ObserverBase* as_observer() {
+    virtual Ref<ObserverBase> as_observer() {
         throw NotImplementedException();
     }
-    virtual ObservableBase* as_observable() {
+    virtual Ref<ObservableBase> as_observable() {
         throw NotImplementedException();
     }
 };
@@ -56,10 +56,10 @@ class SubjectAsObserver : public ObserverBase {
     GDCLASS(SubjectAsObserver, ObserverBase);
 
 private:
-    SubjectBase* subject;
+    Ref<SubjectBase> subject;
 
 public:
-    SubjectAsObserver(SubjectBase* subject) : subject(subject) {}
+    SubjectAsObserver(Ref<SubjectBase> subject) : subject(subject) {}
     SubjectAsObserver(){}
     ~SubjectAsObserver(){}
 
@@ -71,13 +71,13 @@ protected:
     }
 
 public:
-    virtual void on_next(Variant i) override {
+    void on_next(Variant i) override {
         subject->on_next(i);
     }
-    virtual void on_error(RxError* e) override {
+    void on_error(Ref<RxError> e) override {
         subject->on_error(e);
     }
-    virtual void on_completed() override {
+    void on_completed() override {
         subject->on_completed();
     }
 
@@ -87,10 +87,10 @@ class SubjectAsObservable : public ObservableBase {
     GDCLASS(SubjectAsObservable, ObservableBase);
 
 private:
-    SubjectBase* subject;
+    Ref<SubjectBase> subject;
 
 public:
-    SubjectAsObservable(SubjectBase* subject) : subject(subject) {}
+    SubjectAsObservable(Ref<SubjectBase> subject) : subject(subject) {}
     SubjectAsObservable(){}
     ~SubjectAsObservable(){}
 
@@ -100,7 +100,7 @@ protected:
     }
 
 public:
-    virtual DisposableBase* subscribe(Callable on_next, Callable on_error, Callable on_completed, SchedulerBase* scheduler) override {
+    Ref<DisposableBase> subscribe(Callable on_next, Callable on_error, Callable on_completed, Ref<SchedulerBase> scheduler) override {
         return subject->subscribe(on_next, on_error, on_completed, scheduler);
     }
 

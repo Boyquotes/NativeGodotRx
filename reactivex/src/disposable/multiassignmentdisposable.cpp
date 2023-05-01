@@ -28,15 +28,15 @@ Ref<DisposableBase> MultiAssignmentDisposable::get_disposable() {
     return this->current;
 }
 
-void MultiAssignmentDisposable::set_disposable(DisposableBase* value) {
+void MultiAssignmentDisposable::set_disposable(Ref<DisposableBase> value) {
     this->lock->lock();
     bool should_dispose = this->is_disposed;
     if (!should_dispose) {
-        this->current = Ref<DisposableBase>(value);
+        this->current = value;
     }
     this->lock->unlock();
 
-    if (should_dispose && value) {
+    if (should_dispose && !value.is_null()) {
         value->dispose();
     }
 }

@@ -34,10 +34,10 @@ public:
     void dispose() override;
     void dispose_with(Object* obj) override;
 
-    void add(DisposableBase* item);
-    bool remove(DisposableBase* item);
+    void add(Ref<DisposableBase> item);
+    bool remove(Ref<DisposableBase> item);
     void clear();
-    bool contains(DisposableBase* item);
+    bool contains(Ref<DisposableBase> item);
     Array to_list();
     int size();
 

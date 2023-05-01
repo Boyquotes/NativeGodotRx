@@ -21,9 +21,9 @@ void InnerDisposable::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "parent"), "", "__get__parent__");
 }
 
-InnerDisposable* InnerDisposable::Get(RefCountDisposable* parent) {
+InnerDisposable* InnerDisposable::Get(Ref<RefCountDisposable> parent) {
     auto disp = memnew(InnerDisposable);
-    disp->parent = Ref<RefCountDisposable>(parent);
+    disp->parent = parent;
     return disp;
 }
 
@@ -72,9 +72,9 @@ void RefCountDisposable::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::INT, "count"), "", "__get__count__");
 }
 
-RefCountDisposable* RefCountDisposable::Get(DisposableBase* disposable) {
+RefCountDisposable* RefCountDisposable::Get(Ref<DisposableBase> disposable) {
     auto disp = memnew(RefCountDisposable);
-    disp->underlying_disposable = Ref<DisposableBase>(disposable);
+    disp->underlying_disposable = disposable;
     return disp;
 }
 

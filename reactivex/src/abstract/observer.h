@@ -32,7 +32,7 @@ public:
     virtual void on_next(Variant i) {
         throw NotImplementedException();
     }
-    virtual void on_error(RxError* e) {
+    virtual void on_error(Ref<RxError> e) {
         throw NotImplementedException();
     }
     virtual void on_completed() {

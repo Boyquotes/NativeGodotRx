@@ -9,11 +9,9 @@
 #include <godot_cpp/core/class_db.hpp>
 
 #include "abstract/scheduler.h"
+#include "internal/time.h"
 
 using namespace godot;
-
-typedef std::chrono::time_point<std::chrono::system_clock> time_point_;
-typedef std::chrono::time_point<std::chrono::system_clock>::duration time_delta_;
 
 class Scheduler : public SchedulerBase {
     GDCLASS(Scheduler, SchedulerBase);
@@ -32,12 +30,12 @@ public:
 
     static Scheduler* Get();
 
-    float now() override;
+    Ref<AbsoluteTime> now() override;
     Ref<DisposableBase> invoke_action(Callable action, Variant state = Variant());
 
-    static float to_seconds(time_point_ t);
-    static float to_timedelta(time_point_ t);
-    static float to_datetime(time_delta_ dt);
+    static float to_seconds(const Variant& t);
+    static Ref<RelativeTime> to_timedelta(const Variant& t);
+    static Ref<AbsoluteTime> to_datetime(const Variant& t);
 
 };
 

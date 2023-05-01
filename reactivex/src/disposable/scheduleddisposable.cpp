@@ -16,8 +16,6 @@ void ScheduledDisposable::_bind_methods() {
     ClassDB::bind_method(D_METHOD("dispose_with", "obj"), &ScheduledDisposable::dispose_with);
     ClassDB::bind_method(D_METHOD("is_disposed"), &ScheduledDisposable::is_disposed);
 
-    ClassDB::bind_method(D_METHOD("_on_dispose"), &ScheduledDisposable::_on_dispose);
-
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "is_disposed"), "", "is_disposed");
 
     ClassDB::bind_method(D_METHOD("__get__lock__"), &ScheduledDisposable::__get__lock__);
@@ -28,16 +26,12 @@ void ScheduledDisposable::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "scheduler"), "__set__scheduler__", "__get__scheduler__");
 }
 
-void ScheduledDisposable::_on_dispose() {
-    this->disposable->dispose();
-}
-
 bool ScheduledDisposable::is_disposed() {
     return this->disposable->is_disposed;
 }
 
 void ScheduledDisposable::dispose() {
-    auto action = Callable(this, "_on_dispose");
+    auto action = Callable(this->disposable.ptr(), "dispose");
     this->scheduler->schedule(action);
 }
 

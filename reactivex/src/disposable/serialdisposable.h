@@ -35,7 +35,7 @@ public:
     void dispose_with(Object* obj) override;
 
     Ref<DisposableBase> get_disposable();
-    void set_disposable(DisposableBase* value);
+    void set_disposable(Ref<DisposableBase> value);
 
     // Setters and Getters
     bool __get__is_disposed__();
